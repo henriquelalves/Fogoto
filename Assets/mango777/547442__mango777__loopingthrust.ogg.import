@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/547442__mango777__loopingthrust.ogg-8e32d52f1180ea6f4cff22ebce8406b0.oggstr"
+
+[deps]
+
+source_file="res://Assets/mango777/547442__mango777__loopingthrust.ogg"
+dest_files=[ "res://.import/547442__mango777__loopingthrust.ogg-8e32d52f1180ea6f4cff22ebce8406b0.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

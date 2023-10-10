@@ -1,0 +1,986 @@
+[gd_scene load_steps=43 format=2]
+
+[ext_resource path="res://Game/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/OrientedSpatial.gd" type="Script" id=2]
+[ext_resource path="res://Assets/KenneyAssets/Bodies/Platform/ArrowBody.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/KenneyAssets/Bodies/Platform/BlockHexagonLowBody.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/KenneyAssets/Bodies/Platform/TreeBody.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/KenneyAssets/Bodies/Platform/BlockBody.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/KenneyAssets/Bodies/Ships/ShipBody1.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/KenneyAssets/Bodies/Medieval/Windmill.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/KenneyAssets/Bodies/Medieval/Watermill.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/KenneyAssets/Bodies/Food/Pie.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/KenneyAssets/Bodies/Food/Cake.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/KenneyAssets/Bodies/Food/Donut.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/OpenMoji/rocket_icon.png" type="Texture" id=13]
+[ext_resource path="res://Game/HeightPanel.gd" type="Script" id=14]
+[ext_resource path="res://Game/Level.gd" type="Script" id=15]
+[ext_resource path="res://Assets/KenneyAssets/Bodies/Spaceships/Meteor.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/WordArt/congrats.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Fonts/ComicNeue-Regular.ttf" type="DynamicFontData" id=18]
+[ext_resource path="res://Assets/Fonts/ComicNeue-Bold.ttf" type="DynamicFontData" id=19]
+[ext_resource path="res://Assets/incompentech/Son Of A Rocket.mp3" type="AudioStream" id=20]
+[ext_resource path="res://Assets/mc5/524849__mc5__short-brass-fanfare-1.wav" type="AudioStream" id=21]
+[ext_resource path="res://Game/Instructions.gd" type="Script" id=22]
+[ext_resource path="res://Assets/Fonts/ComicNeue-Light.ttf" type="DynamicFontData" id=23]
+
+[sub_resource type="Environment" id=8]
+background_mode = 4
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_energy = 0.7
+dof_blur_far_distance = 72.7
+dof_blur_far_transition = 98.02
+dof_blur_far_quality = 2
+dof_blur_near_distance = 73.7
+dof_blur_near_transition = 4.63
+dof_blur_near_quality = 2
+adjustment_enabled = true
+adjustment_saturation = 1.65
+
+[sub_resource type="SphereShape" id=3]
+radius = 10.0
+
+[sub_resource type="SphereMesh" id=4]
+radius = 10.0
+height = 20.0
+radial_segments = 16
+rings = 16
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 0.0431373, 0.67451, 0.34902, 1 )
+
+[sub_resource type="SphereShape" id=2]
+radius = 1000.0
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "default"
+length = 16.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 16 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "default"
+length = 16.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 16 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+}
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_left = 6.0
+expand_margin_right = 6.0
+expand_margin_top = 6.0
+expand_margin_bottom = 6.0
+
+[sub_resource type="Gradient" id=14]
+offsets = PoolRealArray( 0.00301205, 1 )
+colors = PoolColorArray( 0.290955, 0.886719, 0.816903, 1, 0.342224, 0.367308, 0.984375, 1 )
+
+[sub_resource type="GradientTexture2D" id=15]
+gradient = SubResource( 14 )
+fill_from = Vector2( 0.5125, 1 )
+fill_to = Vector2( 0.508333, 0 )
+
+[sub_resource type="DynamicFont" id=18]
+size = 24
+use_filter = true
+font_data = ExtResource( 18 )
+
+[sub_resource type="Animation" id=16]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "yeah"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="DynamicFont" id=19]
+size = 32
+font_data = ExtResource( 19 )
+
+[sub_resource type="StyleBoxFlat" id=20]
+bg_color = Color( 0.243137, 0.690196, 0.690196, 1 )
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 12
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="DynamicFont" id=21]
+size = 24
+font_data = ExtResource( 19 )
+
+[sub_resource type="DynamicFont" id=22]
+font_data = ExtResource( 23 )
+
+[node name="Level" type="Spatial"]
+script = ExtResource( 15 )
+
+[node name="BackgroundContainer" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BackgroundColorRect" type="ColorRect" parent="BackgroundContainer"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.24, 0.87, 0.82, 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 8 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.987164, 0.0122388, -0.159239, 0.159221, 0.00246423, 0.98724, 0.012475, -0.999922, 0.000483926, 0, 5.94947, 0 )
+light_energy = 0.2
+light_cull_mask = 4294967293
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+unique_name_in_owner = true
+transform = Transform( -0.139207, -0.682557, -0.717452, -0.117811, 0.730776, -0.672374, 0.98323, -0.00907555, -0.182142, -9.73219, -6.34457, 0.000989676 )
+
+[node name="Planet" type="StaticBody" parent="."]
+unique_name_in_owner = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13.4789, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Planet"]
+shape = SubResource( 3 )
+
+[node name="CSGMesh" type="CSGMesh" parent="Planet"]
+mesh = SubResource( 4 )
+material = SubResource( 7 )
+
+[node name="GravityArea" type="Area" parent="Planet"]
+space_override = 3
+gravity_point = true
+gravity_vec = Vector3( 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Planet/GravityArea"]
+shape = SubResource( 2 )
+
+[node name="PlatformsPlanet" type="Spatial" parent="."]
+
+[node name="Arrow" type="Spatial" parent="PlatformsPlanet"]
+transform = Transform( 0.865166, -0.464328, 0.189438, 0.499374, 0.832316, -0.240572, -0.0459676, 0.302736, 0.951965, -4.59411, -5.24388, 2.9953 )
+script = ExtResource( 2 )
+
+[node name="ArrowBody" parent="PlatformsPlanet/Arrow" instance=ExtResource( 3 )]
+transform = Transform( 3, -5.02914e-08, 2.23517e-08, 5.02914e-08, 3, -8.9407e-08, 2.23517e-08, -8.9407e-08, -3, 0, 0, 0 )
+
+[node name="GroundPlatform" type="Spatial" parent="PlatformsPlanet"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.77643, 0 )
+script = ExtResource( 2 )
+
+[node name="BlockHexagonLowBody" parent="PlatformsPlanet/GroundPlatform" instance=ExtResource( 4 )]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
+
+[node name="OrientedSpatial" type="Spatial" parent="PlatformsPlanet"]
+transform = Transform( 0.918989, -0.394283, 1.49012e-08, 0.271876, 0.633683, -0.724244, 0.285557, 0.665572, 0.689544, -3.56039, -7.75672, 6.01013 )
+script = ExtResource( 2 )
+
+[node name="TreeBody" parent="PlatformsPlanet/OrientedSpatial" instance=ExtResource( 5 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+
+[node name="OrientedSpatial2" type="Spatial" parent="PlatformsPlanet"]
+transform = Transform( 0.918989, 0.120652, -0.37537, 0.271876, 0.495594, 0.824906, 0.285557, -0.860134, 0.422643, 1.13699, -8.80856, -8.10566 )
+script = ExtResource( 2 )
+
+[node name="TreeBody" parent="PlatformsPlanet/OrientedSpatial2" instance=ExtResource( 5 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+
+[node name="OrientedSpatial3" type="Spatial" parent="PlatformsPlanet"]
+transform = Transform( 0.46424, -0.802233, -0.37537, 0.561994, -0.060761, 0.824906, -0.684575, -0.593911, 0.422643, -7.61274, -14.0555, -5.63588 )
+script = ExtResource( 2 )
+
+[node name="TreeBody" parent="PlatformsPlanet/OrientedSpatial3" instance=ExtResource( 5 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+
+[node name="OrientedSpatial4" type="Spatial" parent="PlatformsPlanet"]
+transform = Transform( 0.937473, 0.348057, 0, -0.348057, 0.937473, 0, 0, 0, 1, 5.83279, 2.2314, 0 )
+script = ExtResource( 2 )
+
+[node name="BlockBody" parent="PlatformsPlanet/OrientedSpatial4" instance=ExtResource( 6 )]
+transform = Transform( 4, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0 )
+
+[node name="OrientedSpatial5" type="Spatial" parent="PlatformsPlanet"]
+transform = Transform( 0.696158, 0.551445, 0.459643, -0.59303, 0.802577, -0.0646904, -0.404572, -0.227547, 0.885745, 11.8327, 3.74246, -4.88262 )
+script = ExtResource( 2 )
+
+[node name="BlockBody" parent="PlatformsPlanet/OrientedSpatial5" instance=ExtResource( 6 )]
+transform = Transform( 4, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0 )
+
+[node name="OrientedSpatial6" type="Spatial" parent="PlatformsPlanet"]
+transform = Transform( 0.461809, 0.758591, 0.459643, -0.83449, 0.547212, -0.0646904, -0.300596, -0.353693, 0.885745, 20.8967, 1.59501, -9.74309 )
+script = ExtResource( 2 )
+
+[node name="BlockBody" parent="PlatformsPlanet/OrientedSpatial6" instance=ExtResource( 6 )]
+transform = Transform( 4, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0 )
+
+[node name="OrientedSpatial7" type="Spatial" parent="PlatformsPlanet"]
+transform = Transform( 0.326566, 0.874453, 0.358729, -0.920044, 0.20716, 0.332571, 0.216503, -0.438653, 0.872187, 25.1961, -7.50987, -12.6392 )
+script = ExtResource( 2 )
+
+[node name="BlockBody" parent="PlatformsPlanet/OrientedSpatial7" instance=ExtResource( 6 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+
+[node name="TreeBody" parent="PlatformsPlanet/OrientedSpatial7" instance=ExtResource( 5 )]
+transform = Transform( 5, -1.04308e-07, 5.46377e-07, 1.73847e-07, 3, 7.94728e-07, -5.46377e-07, -4.76837e-07, 5, -4.76837e-06, 1.94265, -1.90735e-06 )
+
+[node name="OrientedSpatial8" type="Spatial" parent="PlatformsPlanet"]
+transform = Transform( -0.19286, 0.955942, 0.221315, -0.690934, -0.292455, 0.66112, 0.696717, -0.0254106, 0.716896, 29.2995, -22.4426, -0.778832 )
+script = ExtResource( 2 )
+
+[node name="BlockBody" parent="PlatformsPlanet/OrientedSpatial8" instance=ExtResource( 6 )]
+transform = Transform( 5, 0, 0, 0, 2, 0, 0, 0, 5, 0, 0, 0 )
+
+[node name="ArrowBody" parent="PlatformsPlanet/OrientedSpatial8" instance=ExtResource( 3 )]
+transform = Transform( 0, -4.84288e-07, -4, -9.53674e-07, 5, -5.88596e-07, 4, 6.03497e-07, 1.19209e-06, 1.73087, 1.82035, 0.93559 )
+
+[node name="ArrowBody2" parent="PlatformsPlanet/OrientedSpatial8" instance=ExtResource( 3 )]
+transform = Transform( -1.19209e-07, -5.81145e-07, -4, -0.19735, 4.99391, -6.25849e-07, -3.99513, -0.246688, 9.53674e-07, 1.73087, 1.82038, -1.2575 )
+
+[node name="PlatformsShip" type="Spatial" parent="."]
+
+[node name="OrientedSpatial9" type="Spatial" parent="PlatformsShip"]
+transform = Transform( -0.126945, 0.818283, -0.560622, -0.797588, 0.251802, 0.548133, 0.589694, 0.516729, 0.620688, 30.8834, -3.97547, 19.5022 )
+script = ExtResource( 2 )
+
+[node name="BlockBody" parent="PlatformsShip/OrientedSpatial9" instance=ExtResource( 6 )]
+transform = Transform( 6, 2.98023e-08, -1.78814e-07, -8.9407e-08, 2, -8.94069e-08, 1.78814e-07, 2.98023e-08, 6, 0, 0, 0 )
+
+[node name="ShipsRoot" type="Spatial" parent="PlatformsShip/OrientedSpatial9"]
+
+[node name="ShipBody1" parent="PlatformsShip/OrientedSpatial9/ShipsRoot" instance=ExtResource( 7 )]
+transform = Transform( 0.0277471, 5.96046e-08, 0.999615, 8.9407e-08, 1, -8.9407e-08, -0.999615, 7.45058e-08, 0.0277471, 0, 0, 10.8088 )
+
+[node name="ShipBody2" parent="PlatformsShip/OrientedSpatial9/ShipsRoot" instance=ExtResource( 7 )]
+transform = Transform( -0.0277469, 0, -0.999615, 0, 1, 0, 0.999615, 0, -0.0277469, 0.573565, 3.8147e-06, -9.85441 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlatformsShip/OrientedSpatial9/ShipsRoot"]
+autoplay = "default"
+anims/RESET = SubResource( 9 )
+anims/default = SubResource( 10 )
+
+[node name="TreeBody" parent="PlatformsShip/OrientedSpatial9" instance=ExtResource( 5 )]
+transform = Transform( 4, -4.76837e-07, 3.17892e-07, 6.35783e-07, 3, 6.35783e-07, -3.17892e-07, -4.76837e-07, 4, 1.28485, 1.99352, 1.26704 )
+
+[node name="OrientedSpatial10" type="Spatial" parent="PlatformsShip"]
+transform = Transform( 0.735951, 0.532679, -0.417886, -0.651022, 0.387339, -0.652793, -0.185866, 0.752477, 0.631848, 26.1584, 5.54219, 36.952 )
+script = ExtResource( 2 )
+
+[node name="BlockBody" parent="PlatformsShip/OrientedSpatial10" instance=ExtResource( 6 )]
+transform = Transform( 6, 2.98023e-08, -1.78814e-07, -8.9407e-08, 2, -8.94069e-08, 1.78814e-07, 2.98023e-08, 6, 0, 0, 0 )
+
+[node name="ShipsRoot" type="Spatial" parent="PlatformsShip/OrientedSpatial10"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8147e-06, 3.07869, -1.04904e-05 )
+
+[node name="ShipBody1" parent="PlatformsShip/OrientedSpatial10/ShipsRoot" instance=ExtResource( 7 )]
+transform = Transform( 0.0277471, 5.96046e-08, 0.999615, 8.9407e-08, 1, -8.9407e-08, -0.999615, 7.45058e-08, 0.0277471, 0, 0, 10.8088 )
+
+[node name="ShipBody2" parent="PlatformsShip/OrientedSpatial10/ShipsRoot" instance=ExtResource( 7 )]
+transform = Transform( -0.0277469, 0, -0.999615, 0, 1, 0, 0.999615, 0, -0.0277469, 0.573565, 3.8147e-06, -9.85441 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlatformsShip/OrientedSpatial10/ShipsRoot"]
+autoplay = "default"
+anims/RESET = SubResource( 11 )
+anims/default = SubResource( 12 )
+
+[node name="OrientedSpatial13" type="Spatial" parent="PlatformsShip"]
+transform = Transform( 0.861463, 0.288536, -0.417886, -0.505605, 0.564114, -0.652793, 0.0473808, 0.773643, 0.631848, 13.2763, 12.4775, 35.5974 )
+script = ExtResource( 2 )
+
+[node name="Watermill" parent="PlatformsShip/OrientedSpatial13" instance=ExtResource( 8 )]
+transform = Transform( 7, -2.98023e-07, 4.47035e-07, -2.38419e-07, 7, 1.90735e-06, -3.8743e-07, -2.38419e-06, 7, -5.24521e-06, 6.57111, -3.31801 )
+
+[node name="OrientedSpatial11" type="Spatial" parent="PlatformsShip"]
+transform = Transform( 0.891381, 0.175532, -0.417886, -0.428985, 0.624365, -0.652793, 0.146327, 0.761155, 0.631848, 8.47614, 16.6706, 36.7548 )
+script = ExtResource( 2 )
+
+[node name="BlockBody" parent="PlatformsShip/OrientedSpatial11" instance=ExtResource( 6 )]
+transform = Transform( 6, 2.98023e-08, -1.78814e-07, -8.9407e-08, 2, -8.94069e-08, 1.78814e-07, 2.98023e-08, 6, 0, 0, 0 )
+
+[node name="OrientedSpatial12" type="Spatial" parent="PlatformsShip"]
+transform = Transform( 0.90671, -0.0569985, -0.417886, -0.256042, 0.712954, -0.652793, 0.335141, 0.698891, 0.631848, -2.91146, 22.9385, 35.6991 )
+script = ExtResource( 2 )
+
+[node name="Watermill" parent="PlatformsShip/OrientedSpatial12" instance=ExtResource( 9 )]
+transform = Transform( 0.0198266, -8.04912e-15, 4.99994, 2.38419e-07, 5, -1.47721e-09, -3.99995, 2.98027e-07, 0.0247833, 0, 0, 0 )
+
+[node name="OrientedSpatial14" type="Spatial" parent="PlatformsShip"]
+transform = Transform( 0.83806, -0.23557, -0.4921, -0.158201, 0.758299, -0.63242, 0.522138, 0.607857, 0.598232, -11.6983, 24.1777, 30.1857 )
+script = ExtResource( 2 )
+
+[node name="Watermill" parent="PlatformsShip/OrientedSpatial14" instance=ExtResource( 9 )]
+transform = Transform( 0.0198266, -8.04912e-15, 4.99994, 2.38419e-07, 5, -1.47721e-09, -3.99995, 2.98027e-07, 0.0247833, 0, 0, 0 )
+
+[node name="OrientedSpatial15" type="Spatial" parent="PlatformsShip"]
+transform = Transform( 0.718893, -0.387409, -0.577154, -0.071465, 0.784702, -0.615739, 0.691438, 0.483897, 0.53643, -18.8439, 24.6897, 23.5372 )
+script = ExtResource( 2 )
+
+[node name="Watermill" parent="PlatformsShip/OrientedSpatial15" instance=ExtResource( 9 )]
+transform = Transform( 0.0198266, -8.04912e-15, 4.99994, 2.38419e-07, 5, -1.47721e-09, -3.99995, 2.98027e-07, 0.0247833, 0, 0, 0 )
+
+[node name="OrientedSpatial18" type="Spatial" parent="PlatformsShip"]
+transform = Transform( 0.456434, -0.536087, -0.710125, -0.0051645, 0.796502, -0.604614, 0.889742, 0.279634, 0.360782, -23.3167, 21.1643, 12.1624 )
+script = ExtResource( 2 )
+
+[node name="BlockBody" parent="PlatformsShip/OrientedSpatial18" instance=ExtResource( 6 )]
+transform = Transform( 7, -3.57628e-08, 8.85958e-16, 1.2517e-07, 2, -9.12696e-08, 7.4607e-16, 2.6077e-08, 7, 0, 0, 0 )
+
+[node name="ArrowBody" parent="PlatformsShip/OrientedSpatial18" instance=ExtResource( 3 )]
+transform = Transform( -0.537401, 0.0641009, 4.97062, 0.592194, 4.96481, -3.57628e-07, -4.93564, 0.588715, -0.541211, -3.38184, 1.86098, -0.302431 )
+
+[node name="OrientedSpatial19" type="Spatial" parent="PlatformsShip"]
+transform = Transform( 0.702475, -0.350105, -0.619642, 0.184764, 0.930499, -0.31628, 0.687308, 0.107691, 0.718339, -17.1719, 32.16, 5.28203 )
+script = ExtResource( 2 )
+
+[node name="BlockBody" parent="PlatformsShip/OrientedSpatial19" instance=ExtResource( 6 )]
+transform = Transform( 7, -3.57628e-08, 8.85958e-16, 1.2517e-07, 2, -9.12696e-08, 7.4607e-16, 2.6077e-08, 7, 0, 0, 0 )
+
+[node name="ArrowBody" parent="PlatformsShip/OrientedSpatial19" instance=ExtResource( 3 )]
+transform = Transform( -0.537401, 0.0641009, 4.97062, 0.592194, 4.96481, -3.57628e-07, -4.93564, 0.588715, -0.541211, -3.38184, 1.86098, -0.302431 )
+
+[node name="OrientedSpatial20" type="Spatial" parent="PlatformsShip"]
+transform = Transform( 0.79802, -0.193319, -0.570781, 0.207202, 0.977423, -0.0413515, 0.565889, -0.0852678, 0.82006, -10.6308, 40.2706, -4.68896 )
+script = ExtResource( 2 )
+
+[node name="BlockBody" parent="PlatformsShip/OrientedSpatial20" instance=ExtResource( 6 )]
+transform = Transform( 7, -3.57628e-08, 8.85958e-16, 1.2517e-07, 2, -9.12696e-08, 7.4607e-16, 2.6077e-08, 7, 0, 0, 0 )
+
+[node name="ArrowBody" parent="PlatformsShip/OrientedSpatial20" instance=ExtResource( 3 )]
+transform = Transform( -0.537401, 0.0641009, 4.97062, 0.592194, 4.96481, -3.57628e-07, -4.93564, 0.588715, -0.541211, -3.38184, 1.86098, -0.302431 )
+
+[node name="Spatial" type="Spatial" parent="PlatformsShip/OrientedSpatial20" groups=["checkpoints"]]
+transform = Transform( 1, -2.6077e-08, 2.98023e-08, -2.98023e-08, 1, 7.45058e-09, -2.98023e-08, 2.23517e-08, 1, 2.38419e-07, 5.28967, 7.15256e-07 )
+
+[node name="OrientedSpatial24" type="Spatial" parent="PlatformsShip"]
+transform = Transform( 0.778471, 0.267035, -0.568044, 0.163318, 0.787646, 0.594087, 0.60606, -0.555252, 0.569549, 17.6947, 38.7135, -36.7931 )
+script = ExtResource( 2 )
+
+[node name="TreeBody" parent="PlatformsShip/OrientedSpatial24" instance=ExtResource( 16 )]
+transform = Transform( 14, 0, 0, 0, 14, 0, 0, 0, 14, 0, 0, 0 )
+
+[node name="Spatial" type="Spatial" parent="PlatformsShip/OrientedSpatial24" groups=["checkpoints"]]
+transform = Transform( 1, 0, 0, -5.96046e-08, 1, 2.98023e-08, -5.96046e-08, 0, 1, 0, 7.9667, -9.53674e-07 )
+
+[node name="OrientedSpatial27" type="Spatial" parent="PlatformsShip"]
+transform = Transform( 0.778471, 0.320337, -0.539783, 0.163318, 0.726972, 0.666962, 0.606061, -0.607367, 0.51361, 24.1267, 41.2742, -45.7449 )
+script = ExtResource( 2 )
+
+[node name="BlockBody" parent="PlatformsShip/OrientedSpatial27" instance=ExtResource( 6 )]
+transform = Transform( 3, -1.19209e-07, 1.19209e-07, 0, 3, 5.96046e-08, 0, 1.19209e-07, 3, 0, 0, 0 )
+
+[node name="ArrowBody" parent="PlatformsShip/OrientedSpatial27" instance=ExtResource( 3 )]
+transform = Transform( 0.252441, -4.99362, -1.43051e-06, 4.99362, 0.252439, -4.76837e-07, 7.15256e-07, -3.33786e-06, 5, -1.49796, 1.47494, 0.176572 )
+
+[node name="OrientedSpatial25" type="Spatial" parent="PlatformsShip"]
+transform = Transform( 0.778471, 0.121942, -0.615721, 0.163318, 0.907809, 0.386276, 0.60606, -0.401264, 0.686788, 7.31003, 40.9415, -24.0545 )
+script = ExtResource( 2 )
+
+[node name="TreeBody" parent="PlatformsShip/OrientedSpatial25" instance=ExtResource( 16 )]
+transform = Transform( 14, 0, 0, 0, 14, 0, 0, 0, 14, 0, 0, 0 )
+
+[node name="OrientedSpatial26" type="Spatial" parent="PlatformsShip"]
+transform = Transform( 0.765435, -0.1482, -0.626215, 0.294525, 0.945896, 0.136148, 0.572157, -0.288648, 0.767671, -8.19946, 38.8546, -15.97 )
+script = ExtResource( 2 )
+
+[node name="TreeBody" parent="PlatformsShip/OrientedSpatial26" instance=ExtResource( 16 )]
+transform = Transform( 14, 0, 0, 0, 14, 0, 0, 0, 14, 0, 0, 0 )
+
+[node name="PlatformsFood" type="Spatial" parent="."]
+
+[node name="OrientedSpatial9" type="Spatial" parent="PlatformsFood"]
+transform = Transform( -0.35552, 0.834487, 0.420996, -0.598628, -0.549211, 0.583106, 0.717809, -0.0447139, 0.694802, 28.9466, -32.5299, -1.55103 )
+script = ExtResource( 2 )
+
+[node name="Pie" parent="PlatformsFood/OrientedSpatial9" instance=ExtResource( 10 )]
+transform = Transform( 3.94983, -0.631529, 2.54249e-07, 0.631529, 3.94983, -8.00721e-08, -2.38419e-07, 1.19209e-07, 4, 0, 0, 0 )
+
+[node name="Donut" parent="PlatformsFood/OrientedSpatial9" instance=ExtResource( 12 )]
+transform = Transform( 6, -4.17233e-07, 2.38419e-07, 2.5332e-07, 6, 5.96046e-08, -4.76837e-07, -1.49012e-08, 6, -2.79273, 7.62939e-06, -4.34329 )
+
+[node name="OrientedSpatial13" type="Spatial" parent="PlatformsFood"]
+transform = Transform( -0.216502, 0.26684, -0.939108, -0.575793, -0.811713, -0.0978987, -0.788409, 0.519537, 0.329382, 9.94927, -43.744, 19.3712 )
+script = ExtResource( 2 )
+
+[node name="Pie" parent="PlatformsFood/OrientedSpatial13" instance=ExtResource( 10 )]
+transform = Transform( 3.94983, -0.631529, 2.54249e-07, 0.631529, 3.94983, -8.00721e-08, -2.38419e-07, 1.19209e-07, 4, 0, 0, 0 )
+
+[node name="Donut" parent="PlatformsFood/OrientedSpatial13" instance=ExtResource( 12 )]
+transform = Transform( 6, -4.17233e-07, 2.38419e-07, 2.5332e-07, 6, 5.96046e-08, -4.76837e-07, -1.49012e-08, 6, -2.79273, 7.62939e-06, -4.34329 )
+
+[node name="OrientedSpatial10" type="Spatial" parent="PlatformsFood"]
+transform = Transform( -0.395517, 0.72959, 0.557911, -0.562492, -0.672615, 0.480824, 0.726064, -0.123647, 0.676419, 27.3703, -38.7118, -4.63856 )
+script = ExtResource( 2 )
+
+[node name="Cake" parent="PlatformsFood/OrientedSpatial10" instance=ExtResource( 11 )]
+transform = Transform( 5.96787, -0.620089, 0, 0.617492, 5.94288, -0.548488, 0.0566852, 0.545551, 5.97488, 0.544517, 7.62939e-06, -0.0691786 )
+
+[node name="Cake2" parent="PlatformsFood/OrientedSpatial10" instance=ExtResource( 11 )]
+transform = Transform( 5.95927, 0.694531, -0.0689416, -0.695022, 5.85111, -1.13201, -0.0638056, 1.13231, 5.89184, -4.67742, 0.0341644, -6.37657 )
+
+[node name="OrientedSpatial12" type="Spatial" parent="PlatformsFood"]
+transform = Transform( -0.741381, 0.372948, 0.557911, -0.0775162, -0.873384, 0.480824, 0.666593, 0.313227, 0.676419, 12.9945, -43.9101, 10.9137 )
+script = ExtResource( 2 )
+
+[node name="Cake" parent="PlatformsFood/OrientedSpatial12" instance=ExtResource( 11 )]
+transform = Transform( 5.96787, -0.620089, 0, 0.617492, 5.94288, -0.548488, 0.0566852, 0.545551, 5.97488, 0.544517, 7.62939e-06, -0.0691786 )
+
+[node name="Cake2" parent="PlatformsFood/OrientedSpatial12" instance=ExtResource( 11 )]
+transform = Transform( 5.95927, 0.694531, -0.0689416, -0.695022, 5.85111, -1.13201, -0.0638056, 1.13231, 5.89184, -4.67742, 0.0341644, -6.37657 )
+
+[node name="OrientedSpatial15" type="Spatial" parent="PlatformsFood"]
+transform = Transform( 0.0344356, -0.298397, 0.953821, 0.729993, -0.644328, -0.227929, 0.682587, 0.704131, 0.195639, -11.3539, -37.9955, 26.7921 )
+script = ExtResource( 2 )
+
+[node name="Cake" parent="PlatformsFood/OrientedSpatial15" instance=ExtResource( 11 )]
+transform = Transform( 5.96787, -0.620089, 0, 0.617492, 5.94288, -0.548488, 0.0566852, 0.545551, 5.97488, 0.544517, 7.62939e-06, -0.0691786 )
+
+[node name="Cake2" parent="PlatformsFood/OrientedSpatial15" instance=ExtResource( 11 )]
+transform = Transform( 5.95927, 0.694531, -0.0689416, -0.695022, 5.85111, -1.13201, -0.0638056, 1.13231, 5.89184, -4.67742, 0.0341644, -6.37657 )
+
+[node name="OrientedSpatial17" type="Spatial" parent="PlatformsFood"]
+transform = Transform( -0.406626, -0.807706, 0.426925, 0.731239, -0.00760657, 0.682079, -0.547673, 0.589535, 0.593719, -30.1447, -13.7628, 22.0023 )
+script = ExtResource( 2 )
+
+[node name="Cake" parent="PlatformsFood/OrientedSpatial17" instance=ExtResource( 11 )]
+transform = Transform( 5.96787, -0.620089, 0, 0.617492, 5.94288, -0.548488, 0.0566852, 0.545551, 5.97488, 0.544517, 7.62939e-06, -0.0691786 )
+
+[node name="Cake2" parent="PlatformsFood/OrientedSpatial17" instance=ExtResource( 11 )]
+transform = Transform( 5.95927, 0.694531, -0.0689416, -0.695022, 5.85111, -1.13201, -0.0638056, 1.13231, 5.89184, -4.67742, 0.0341644, -6.37657 )
+
+[node name="OrientedSpatial19" type="Spatial" parent="PlatformsFood"]
+transform = Transform( 0.546292, -0.626891, 0.555492, 0.804632, 0.576997, -0.140147, -0.232661, 0.523528, 0.819627, -27.0312, 11.4009, 22.5742 )
+script = ExtResource( 2 )
+
+[node name="Cake" parent="PlatformsFood/OrientedSpatial19" instance=ExtResource( 11 )]
+transform = Transform( 5.96787, -0.620089, 0, 0.617492, 5.94288, -0.548488, 0.0566852, 0.545551, 5.97488, 0.544517, 7.62939e-06, -0.0691786 )
+
+[node name="Cake2" parent="PlatformsFood/OrientedSpatial19" instance=ExtResource( 11 )]
+transform = Transform( 5.95927, 0.694531, -0.0689416, -0.695022, 5.85111, -1.13201, -0.0638056, 1.13231, 5.89184, -4.67742, 0.0341644, -6.37657 )
+
+[node name="Donut" parent="PlatformsFood/OrientedSpatial19" instance=ExtResource( 12 )]
+transform = Transform( 7, 1.19209e-06, -3.8147e-06, -2.74181e-06, 7, -2.14577e-06, 7.15256e-07, 0, 7, 3.23613, 2.6319, -6.64746 )
+
+[node name="OrientedSpatial11" type="Spatial" parent="PlatformsFood"]
+transform = Transform( -0.528776, 0.623289, 0.576114, -0.302797, -0.772635, 0.557986, 0.792913, 0.120604, 0.597281, 22.9827, -41.9685, 4.44707 )
+script = ExtResource( 2 )
+
+[node name="Donut2" parent="PlatformsFood/OrientedSpatial11" instance=ExtResource( 12 )]
+transform = Transform( 7.5073, -2.48329, 1.21394, 2.62, 7.51259, -0.834639, -0.880899, 1.1808, 7.86319, 2.71535, 1.69084, -0.744657 )
+
+[node name="Donut3" parent="PlatformsFood/OrientedSpatial11" instance=ExtResource( 12 )]
+transform = Transform( 7.50731, -2.48329, 1.21395, 2.62, 7.51259, -0.834644, -0.880897, 1.1808, 7.86319, -2.14162, -0.541405, 4.92123 )
+
+[node name="Pie2" parent="PlatformsFood/OrientedSpatial11" instance=ExtResource( 10 )]
+transform = Transform( 3.51054, -1.81871, 0.606973, 1.88662, 3.50236, -0.417323, -0.341712, 0.652536, 3.9316, -3.76731, 3.91047, -4.84626 )
+
+[node name="OrientedSpatial16" type="Spatial" parent="PlatformsFood"]
+transform = Transform( -0.732438, -0.674494, 0.0926905, 0.486873, -0.423735, 0.763808, -0.475908, 0.604571, 0.638753, -24.2294, -28.7005, 21.7176 )
+script = ExtResource( 2 )
+
+[node name="Donut2" parent="PlatformsFood/OrientedSpatial16" instance=ExtResource( 12 )]
+transform = Transform( 7.5073, -2.48329, 1.21394, 2.62, 7.51259, -0.834639, -0.880899, 1.1808, 7.86319, 2.71535, 1.69084, -0.744657 )
+
+[node name="Donut3" parent="PlatformsFood/OrientedSpatial16" instance=ExtResource( 12 )]
+transform = Transform( 7.50731, -2.25417, 1.59973, 2.62, 7.27857, -2.03913, -0.880897, 2.43746, 7.56855, -2.14162, -0.541401, 4.92123 )
+
+[node name="Pie2" parent="PlatformsFood/OrientedSpatial16" instance=ExtResource( 10 )]
+transform = Transform( 3.51054, -1.81871, 0.606973, 1.88662, 3.50236, -0.417323, -0.341712, 0.652536, 3.9316, -3.76731, 3.91047, -4.84626 )
+
+[node name="OrientedSpatial18" type="Spatial" parent="PlatformsFood"]
+transform = Transform( 0.424754, -0.768971, 0.477775, 0.899055, 0.29637, -0.32228, 0.106226, 0.566436, 0.817231, -30.8677, -1.5821, 22.7377 )
+script = ExtResource( 2 )
+
+[node name="Donut2" parent="PlatformsFood/OrientedSpatial18" instance=ExtResource( 12 )]
+transform = Transform( 7.75807, -1.52929, 1.21394, 1.66428, 7.78033, -0.834639, -1.02106, 1.06194, 7.86319, 2.71535, 1.69084, -0.744655 )
+
+[node name="Donut3" parent="PlatformsFood/OrientedSpatial18" instance=ExtResource( 12 )]
+transform = Transform( 7.50731, -2.48329, 1.21395, 2.62, 7.51259, -0.834644, -0.880897, 1.1808, 7.86319, -2.14162, -0.541405, 4.92123 )
+
+[node name="Pie2" parent="PlatformsFood/OrientedSpatial18" instance=ExtResource( 10 )]
+transform = Transform( 3.51054, -1.81871, 0.606973, 1.88662, 3.50236, -0.417323, -0.341712, 0.652536, 3.9316, -3.76731, 3.91047, -4.84626 )
+
+[node name="OrientedSpatial14" type="Spatial" parent="PlatformsFood"]
+transform = Transform( 0.0270488, 0.00531747, 0.99962, 0.691041, -0.722663, -0.0148548, 0.722309, 0.69118, -0.0232218, 0.193446, -39.7689, 25.1447 )
+script = ExtResource( 2 )
+
+[node name="Donut2" parent="PlatformsFood/OrientedSpatial14" instance=ExtResource( 12 )]
+transform = Transform( 7.78527, -1.51312, 1.04884, 1.56918, 7.83717, -0.341241, -0.962948, 0.537809, 7.92361, 2.71535, 1.69084, -0.744657 )
+
+[node name="Donut3" parent="PlatformsFood/OrientedSpatial14" instance=ExtResource( 12 )]
+transform = Transform( 7.50731, -2.48329, 1.21395, 2.62, 7.51259, -0.834644, -0.880897, 1.1808, 7.86319, -2.14162, -0.541405, 4.92123 )
+
+[node name="Pie2" parent="PlatformsFood/OrientedSpatial14" instance=ExtResource( 10 )]
+transform = Transform( 3.51054, -1.81871, 0.606973, 1.88662, 3.50236, -0.417323, -0.341712, 0.652536, 3.9316, -3.76731, 3.91047, -4.84626 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UIContainer" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HeightPanel" type="Panel" parent="CanvasLayer/UIContainer"]
+unique_name_in_owner = true
+anchor_bottom = 1.0
+margin_left = 21.0
+margin_top = 72.0
+margin_right = 50.0
+margin_bottom = -72.0
+custom_styles/panel = SubResource( 13 )
+script = ExtResource( 14 )
+min_height = 10.0
+max_height = 81.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIContainer/HeightPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 15 )
+expand = true
+
+[node name="HeightShipRoot" type="Control" parent="CanvasLayer/UIContainer/HeightPanel"]
+unique_name_in_owner = true
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/UIContainer/HeightPanel/HeightShipRoot"]
+margin_left = -58.0
+margin_right = 24.0
+margin_bottom = 82.0
+rect_rotation = -45.3428
+texture = ExtResource( 13 )
+expand = true
+
+[node name="HeightLabel" type="Label" parent="CanvasLayer/UIContainer/HeightPanel/HeightShipRoot"]
+unique_name_in_owner = true
+margin_left = 29.0
+margin_top = -18.0
+margin_right = 69.0
+margin_bottom = -4.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 18 )
+text = "0.0"
+
+[node name="Congratulations" type="TextureRect" parent="CanvasLayer/UIContainer"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -430.5
+margin_top = -188.0
+margin_right = 430.5
+margin_bottom = 188.0
+rect_scale = Vector2( 1e-05, 1e-05 )
+rect_pivot_offset = Vector2( 438.5, 189 )
+texture = ExtResource( 17 )
+expand = true
+
+[node name="CongratulationsAnimation" type="AnimationPlayer" parent="CanvasLayer/UIContainer/Congratulations"]
+unique_name_in_owner = true
+anims/RESET = SubResource( 16 )
+anims/yeah = SubResource( 17 )
+
+[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/UIContainer"]
+unique_name_in_owner = true
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -365.0
+margin_top = 159.0
+margin_right = 365.0
+margin_bottom = 196.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 19 )
+text = "Final Time: 0.0.0"
+align = 1
+
+[node name="Instructions" type="Control" parent="CanvasLayer/UIContainer"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 22 )
+
+[node name="Overlay" type="ColorRect" parent="CanvasLayer/UIContainer/Instructions"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.509804 )
+
+[node name="Keys" type="Control" parent="CanvasLayer/UIContainer/Instructions"]
+margin_left = 167.0
+margin_top = -116.0
+margin_right = 207.0
+margin_bottom = -76.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/UIContainer/Instructions/Keys"]
+margin_left = 226.0
+margin_top = 249.0
+margin_right = 266.0
+margin_bottom = 289.0
+custom_styles/panel = SubResource( 20 )
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/UIContainer/Instructions/Keys/Panel"]
+margin_left = 19.0
+margin_top = 11.0
+margin_right = 21.0
+margin_bottom = 25.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/UIContainer/Instructions/Keys/Panel/ColorRect"]
+margin_left = 1.28662
+margin_top = -2.0
+margin_right = 3.28662
+margin_bottom = 5.0
+rect_rotation = 49.0457
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/UIContainer/Instructions/Keys/Panel/ColorRect"]
+margin_right = 2.0
+margin_bottom = 6.0
+rect_rotation = -43.5036
+color = Color( 0, 0, 0, 1 )
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/UIContainer/Instructions/Keys"]
+margin_left = 226.0
+margin_top = 291.0
+margin_right = 266.0
+margin_bottom = 331.0
+custom_styles/panel = SubResource( 20 )
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/UIContainer/Instructions/Keys/Panel2"]
+margin_left = 20.0
+margin_top = 24.0
+margin_right = 22.0
+margin_bottom = 38.0
+rect_rotation = -179.14
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/UIContainer/Instructions/Keys/Panel2/ColorRect2"]
+margin_left = 1.28662
+margin_top = -2.0
+margin_right = 3.28662
+margin_bottom = 5.0
+rect_rotation = 49.0457
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/UIContainer/Instructions/Keys/Panel2/ColorRect2"]
+margin_right = 2.0
+margin_bottom = 6.0
+rect_rotation = -43.5036
+color = Color( 0, 0, 0, 1 )
+
+[node name="Panel3" type="Panel" parent="CanvasLayer/UIContainer/Instructions/Keys"]
+margin_left = 184.0
+margin_top = 291.0
+margin_right = 224.0
+margin_bottom = 331.0
+custom_styles/panel = SubResource( 20 )
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/UIContainer/Instructions/Keys/Panel3"]
+margin_left = 13.0
+margin_top = 18.0
+margin_right = 15.0
+margin_bottom = 32.0
+rect_rotation = -89.0262
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/UIContainer/Instructions/Keys/Panel3/ColorRect3"]
+margin_left = 1.28662
+margin_top = -2.0
+margin_right = 3.28662
+margin_bottom = 5.0
+rect_rotation = 49.0457
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/UIContainer/Instructions/Keys/Panel3/ColorRect3"]
+margin_right = 2.0
+margin_bottom = 6.0
+rect_rotation = -43.5036
+color = Color( 0, 0, 0, 1 )
+
+[node name="Panel4" type="Panel" parent="CanvasLayer/UIContainer/Instructions/Keys"]
+margin_left = 268.0
+margin_top = 291.0
+margin_right = 308.0
+margin_bottom = 331.0
+custom_styles/panel = SubResource( 20 )
+
+[node name="ColorRect4" type="ColorRect" parent="CanvasLayer/UIContainer/Instructions/Keys/Panel4"]
+margin_left = 27.0
+margin_top = 15.0
+margin_right = 29.0
+margin_bottom = 29.0
+rect_rotation = 87.3235
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/UIContainer/Instructions/Keys/Panel4/ColorRect4"]
+margin_left = 1.28662
+margin_top = -2.0
+margin_right = 3.28662
+margin_bottom = 5.0
+rect_rotation = 49.0457
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/UIContainer/Instructions/Keys/Panel4/ColorRect4"]
+margin_right = 2.0
+margin_bottom = 6.0
+rect_rotation = -43.5036
+color = Color( 0, 0, 0, 1 )
+
+[node name="Label" type="Label" parent="CanvasLayer/UIContainer/Instructions/Keys"]
+margin_left = 358.0
+margin_top = 269.0
+margin_right = 504.0
+margin_bottom = 297.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 21 )
+text = "Rotate Fogoto"
+
+[node name="Keys2" type="Control" parent="CanvasLayer/UIContainer/Instructions"]
+margin_left = 167.0
+margin_top = -6.0
+margin_right = 207.0
+margin_bottom = 34.0
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/UIContainer/Instructions/Keys2"]
+margin_left = 246.0
+margin_top = 267.0
+margin_right = 286.0
+margin_bottom = 307.0
+custom_styles/panel = SubResource( 20 )
+
+[node name="Panel3" type="Panel" parent="CanvasLayer/UIContainer/Instructions/Keys2"]
+margin_left = 204.0
+margin_top = 267.0
+margin_right = 244.0
+margin_bottom = 307.0
+custom_styles/panel = SubResource( 20 )
+
+[node name="Label2" type="Label" parent="CanvasLayer/UIContainer/Instructions/Keys2"]
+margin_left = 358.0
+margin_top = 271.0
+margin_right = 504.0
+margin_bottom = 299.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 21 )
+text = "Rotate Camera"
+
+[node name="Label3" type="Label" parent="CanvasLayer/UIContainer/Instructions/Keys2"]
+margin_left = 214.0
+margin_top = 271.0
+margin_right = 360.0
+margin_bottom = 299.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 21 )
+text = "Q"
+
+[node name="Label4" type="Label" parent="CanvasLayer/UIContainer/Instructions/Keys2"]
+margin_left = 257.0
+margin_top = 271.0
+margin_right = 403.0
+margin_bottom = 299.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 21 )
+text = "E"
+
+[node name="Keys4" type="Control" parent="CanvasLayer/UIContainer/Instructions"]
+margin_left = 167.0
+margin_top = 170.0
+margin_right = 207.0
+margin_bottom = 210.0
+
+[node name="Panel3" type="Panel" parent="CanvasLayer/UIContainer/Instructions/Keys4"]
+margin_left = 222.0
+margin_top = 267.0
+margin_right = 262.0
+margin_bottom = 307.0
+custom_styles/panel = SubResource( 20 )
+
+[node name="Label2" type="Label" parent="CanvasLayer/UIContainer/Instructions/Keys4"]
+margin_left = 358.0
+margin_top = 271.0
+margin_right = 504.0
+margin_bottom = 299.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 21 )
+text = "Restart"
+
+[node name="Label3" type="Label" parent="CanvasLayer/UIContainer/Instructions/Keys4"]
+margin_left = 234.0
+margin_top = 271.0
+margin_right = 380.0
+margin_bottom = 299.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 21 )
+text = "R"
+
+[node name="Keys3" type="Control" parent="CanvasLayer/UIContainer/Instructions"]
+margin_left = 167.0
+margin_top = 82.0
+margin_right = 207.0
+margin_bottom = 122.0
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/UIContainer/Instructions/Keys3"]
+margin_left = 174.0
+margin_top = 267.0
+margin_right = 317.0
+margin_bottom = 307.0
+custom_styles/panel = SubResource( 20 )
+
+[node name="Label2" type="Label" parent="CanvasLayer/UIContainer/Instructions/Keys3"]
+margin_left = 358.0
+margin_top = 271.0
+margin_right = 504.0
+margin_bottom = 299.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 21 )
+text = "Fly!"
+
+[node name="Label3" type="Label" parent="CanvasLayer/UIContainer/Instructions/Keys3"]
+margin_left = 167.0
+margin_top = 271.0
+margin_right = 321.0
+margin_bottom = 299.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 21 )
+text = "Spacebar"
+align = 1
+
+[node name="Overlay" type="ColorRect" parent="CanvasLayer/UIContainer"]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="CurrentTimeLabel" type="Label" parent="CanvasLayer/UIContainer"]
+unique_name_in_owner = true
+margin_left = 689.0
+margin_top = 9.0
+margin_right = 1006.0
+margin_bottom = 28.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 22 )
+text = "0.00s"
+align = 2
+
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+autoplay = true
+
+[node name="FanfarePlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 21 )

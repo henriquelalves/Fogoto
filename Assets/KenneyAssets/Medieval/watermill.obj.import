@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/watermill.obj-0b19c7d59f778dfdbdb56ef670f907cd.mesh"
+
+[deps]
+
+files=[ "res://.import/watermill.obj-0b19c7d59f778dfdbdb56ef670f907cd.mesh" ]
+
+source_file="res://Assets/KenneyAssets/Medieval/watermill.obj"
+dest_files=[ "res://.import/watermill.obj-0b19c7d59f778dfdbdb56ef670f907cd.mesh", "res://.import/watermill.obj-0b19c7d59f778dfdbdb56ef670f907cd.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

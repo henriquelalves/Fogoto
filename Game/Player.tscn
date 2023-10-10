@@ -1,0 +1,279 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Assets/Player/WindowMaterial.tres" type="Material" id=1]
+[ext_resource path="res://Game/Player.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Player/BaseMaterial.tres" type="Material" id=3]
+[ext_resource path="res://Assets/Player/TopMaterial.tres" type="Material" id=4]
+[ext_resource path="res://Assets/Player/BodyMaterial.tres" type="Material" id=5]
+[ext_resource path="res://Assets/Player/PlayerRocket.glb" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Krial/campfire_16x16.png" type="Texture" id=7]
+[ext_resource path="res://Game/IgnitionSpriteRoot.gd" type="Script" id=8]
+[ext_resource path="res://Assets/FelisChaus/explosion.png" type="Texture" id=9]
+[ext_resource path="res://Assets/MATRIXXX/403298__matrixxx__retro-explosion-02.wav" type="AudioStream" id=10]
+[ext_resource path="res://Assets/mango777/547442__mango777__loopingthrust.wav" type="AudioStream" id=11]
+
+[sub_resource type="SphereShape" id=3]
+radius = 0.2
+
+[sub_resource type="ConvexPolygonShape" id=1]
+points = PoolVector3Array( 0.983073, 0.101073, -5.36442e-07, 0.865866, 0.799917, -5.36442e-07, 0.749815, 0.799917, 0.432837, 0.85124, 0.101073, 0.491536, 0.85124, 0.101073, -0.491537, 0.749815, 0.799917, -0.43303, 0.432837, 1.38564, -0.250003, 0.499812, 1.38564, -5.36442e-07, 0.432837, 1.38564, 0.249809, 0.432837, 0.799917, 0.749814, 0.491536, 0.101073, 0.851239, 0.531568, 0.101073, -0.811402, 0.432837, 0.799917, -0.750008, 0.24981, 1.38564, -0.43303, 0, 1.6, -5.36442e-07, 0.24981, 1.38564, 0.432837, 0, 0.799917, 0.865866, 0, 0.101073, 0.983073, 0.491536, 0.101073, -0.851433, 0, 0.799917, -0.86606, 0, 1.38564, -0.500005, -0.433029, 1.38564, 0.249809, -0.250002, 1.38564, 0.432837, 0, 1.38564, 0.499812, -0.250002, 1.38564, -0.43303, -0.433029, 1.38564, -0.250003, -0.500005, 1.38564, -5.36442e-07, -0.433029, 0.799917, 0.749814, -0.491729, 0.101073, 0.851239, 0.0546579, 0.101073, -0.968447, 0, 0.101073, -0.983074, -0.491729, 0.101073, -0.851433, -0.433029, 0.799917, -0.750008, -0.750007, 0.799917, 0.432837, -0.866059, 0.799917, -5.36442e-07, -0.750007, 0.799917, -0.43303, -0.851432, 0.101073, 0.491536, -0.811401, 0.101073, -0.531761, -0.851432, 0.101073, -0.491537, -0.968446, 0.101073, -0.054851, -0.983073, 0.101073, -5.36442e-07 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.0666667, 0.686275, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.231373, 0.231373, 0.231373, 1 )
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_left = 6.0
+expand_margin_right = 6.0
+expand_margin_top = 6.0
+expand_margin_bottom = 6.0
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("IgnitionSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "ignite"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("IgnitionSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 3 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("ExplosionSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ExplosionSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SoundExplosion:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "explode"
+length = 2.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("ExplosionSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 15 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ExplosionSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.55 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SoundExplosion:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[node name="Player" type="RigidBody"]
+continuous_cd = true
+contacts_reported = 2
+contact_monitor = true
+script = ExtResource( 2 )
+
+[node name="Center" type="Spatial" parent="."]
+unique_name_in_owner = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.536697, 0 )
+
+[node name="BaseShape1" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.386386, 0.00640019, 0.395102 )
+shape = SubResource( 3 )
+disabled = true
+
+[node name="BaseShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.392197, 0.00640019, -0.400912 )
+shape = SubResource( 3 )
+disabled = true
+
+[node name="BaseShape3" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.415438, 0.00640019, -0.400912 )
+shape = SubResource( 3 )
+disabled = true
+
+[node name="BaseShape4" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.409628, 0.00640019, 0.395102 )
+shape = SubResource( 3 )
+disabled = true
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0884584, 0 )
+shape = SubResource( 1 )
+
+[node name="CameraAnchor" type="Spatial" parent="."]
+unique_name_in_owner = true
+
+[node name="Camera" type="Camera" parent="CameraAnchor"]
+unique_name_in_owner = true
+transform = Transform( 1, 0, 0, 0, 0.877037, 0.480422, 0, -0.480422, 0.877037, 0, 6.27641, 7.82139 )
+
+[node name="PlayerUI" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="PlayerUI"]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="FuelBar" type="ProgressBar" parent="PlayerUI"]
+unique_name_in_owner = true
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -129.0
+margin_top = 15.0
+margin_right = 129.0
+margin_bottom = 42.0
+custom_styles/fg = SubResource( 9 )
+custom_styles/bg = SubResource( 8 )
+max_value = 1.0
+step = 0.001
+value = 0.4
+percent_visible = false
+
+[node name="PlayerRocketModel" parent="." instance=ExtResource( 6 )]
+unique_name_in_owner = true
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.089969, 0 )
+
+[node name="RocketBody" parent="PlayerRocketModel" index="0"]
+layers = 2
+material_override = ExtResource( 5 )
+
+[node name="RocketTop" parent="PlayerRocketModel" index="1"]
+layers = 2
+material_override = ExtResource( 4 )
+
+[node name="RocketBase" parent="PlayerRocketModel" index="2"]
+layers = 2
+material_override = ExtResource( 3 )
+
+[node name="RocketWindow" parent="PlayerRocketModel" index="3"]
+layers = 2
+material_override = ExtResource( 1 )
+cast_shadow = 0
+
+[node name="PlayerLight" type="SpotLight" parent="."]
+unique_name_in_owner = true
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8.77428, 0 )
+light_energy = 0.3
+shadow_enabled = true
+shadow_bias = 0.619
+spot_range = 16.0203
+spot_angle = 13.0687
+
+[node name="IgnitionSpriteRoot" type="Spatial" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 8 )
+
+[node name="IgnitionSprite" type="Sprite3D" parent="IgnitionSpriteRoot"]
+transform = Transform( 8, 0, 0, 0, 8, 0, 0, 0, 8, 0, -0.311265, 0 )
+texture = ExtResource( 7 )
+hframes = 4
+
+[node name="IgnitionAnimationPlayer" type="AnimationPlayer" parent="IgnitionSpriteRoot"]
+unique_name_in_owner = true
+anims/RESET = SubResource( 4 )
+anims/ignite = SubResource( 5 )
+
+[node name="ExplosionSpriteRoot" type="Spatial" parent="."]
+
+[node name="ExplosionSprite" type="Sprite3D" parent="ExplosionSpriteRoot"]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
+visible = false
+billboard = 1
+texture = ExtResource( 9 )
+hframes = 4
+vframes = 4
+
+[node name="ExplosionAnimationPlayer" type="AnimationPlayer" parent="ExplosionSpriteRoot"]
+unique_name_in_owner = true
+anims/RESET = SubResource( 6 )
+anims/explode = SubResource( 7 )
+
+[node name="SoundExplosion" type="AudioStreamPlayer" parent="ExplosionSpriteRoot"]
+stream = ExtResource( 10 )
+
+[node name="SoundEngine" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 11 )
+
+[editable path="PlayerRocketModel"]

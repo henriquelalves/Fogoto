@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+resource_local_to_scene = true
+flags_unshaded = true
+flags_use_point_size = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id=2]
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0601852, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.810185, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[node name="CPUParticles" type="CPUParticles"]
+material_override = SubResource( 1 )
+cast_shadow = 0
+emitting = false
+amount = 40
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+mesh = SubResource( 2 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 30.0
+linear_accel = -50.0
+scale_amount_curve = SubResource( 3 )
